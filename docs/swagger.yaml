@@ -1,0 +1,101 @@
+basePath: /api/v1
+definitions:
+  request.Login:
+    properties:
+      address:
+        type: string
+      signData:
+        type: string
+      signature:
+        type: string
+    type: object
+  request.UpdateEmail:
+    properties:
+      email:
+        type: string
+    type: object
+  response.RespResult:
+    properties:
+      code:
+        type: integer
+      data: {}
+      msg:
+        type: string
+    type: object
+  response.UserInfo:
+    properties:
+      address:
+        type: string
+      email:
+        type: string
+      expiresAt:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      token:
+        type: string
+    type: object
+info:
+  contact: {}
+  title: wordblock-backend
+  version: 1.0.0
+paths:
+  /login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: login param
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.RespResult'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.UserInfo'
+              type: object
+      summary: User login
+      tags:
+      - auth
+  /user/email:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: token
+        in: header
+        name: Authorization
+        type: string
+      - description: update user email
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.UpdateEmail'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.RespResult'
+      security:
+      - ApiKeyAuth: []
+      summary: update user email
+      tags:
+      - auth
+schemes:
+- http
+- https
+swagger: "2.0"

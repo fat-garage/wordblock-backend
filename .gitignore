@@ -1,0 +1,7 @@
+.idea/*
+.vscode/*
+go.sum
+build/*
+auto.sh
+config.yaml
+*.exe
