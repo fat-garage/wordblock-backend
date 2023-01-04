@@ -25,6 +25,10 @@ func Upload(c *gin.Context) {
 
 func GetDIDCidList(c *gin.Context) {
 	cid := c.Param("cid")
+	if cid == "" {
+		response.Fail(c, errors.New("invalid param"))
+		return
+	}
 	list, err := block.Srv.GetDIDBlockList(cid)
 	if err != nil {
 		response.Fail(c, err)

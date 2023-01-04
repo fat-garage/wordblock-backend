@@ -1,9 +1,9 @@
 database:
-  dialect: mysql
-  user: root
+  dialect: pgsql
+  user: postgres
   password:
   host:
-  port:
+  port: 5432
   dbname: wordblock
   max_idle_conn: 10
   max_open_conn: 100
